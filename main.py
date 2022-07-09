@@ -45,7 +45,7 @@ async def shootings(ctx):
 		shootings_today = shootings["Records"]["Today"]
 		
 		d = "s" if len(shootings_today) < 1 else ""
-		if daysSince <= 1 or shootings_today != []:
+		if shootings_today != []:
 			embed = discord.Embed(title=f"{len(shootings_today)} Mass shooting{d} today", color=0x00ff00, url=shootings["Records"]["Today"][0]["SourceURL"])
 			for shooting in shootings_today:
 				for key, value in shooting.items():
