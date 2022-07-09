@@ -9,7 +9,7 @@ async def getMassShootings():
 
 bot = commands.Bot()
 
-@bot.slash_command(name="shootings", description="Shows the most recent shootings in the US", debug_guilds=[994267416454508644])
+@bot.slash_command(name="shootings", description="Shows the most recent shootings in the US")
 async def shootings(ctx):
 	try:
 		await ctx.defer()
