@@ -62,7 +62,7 @@ async def shootings(ctx):
 
 		view = discord.ui.View()
 		view.add_item(InviteButton())
-		await ctx.respond(embed=embed)
+		await ctx.respond(embed=embed, view=view)
 	except Exception as e:
 		embed = discord.Embed(title="Error", description=f"{e}", color=0xFF0000)
 		await ctx.respond(embed=embed)
