@@ -56,7 +56,6 @@ async def shootings(ctx):
 		else:
 			embed = discord.Embed(title=f"0 Mass shootings today", color=0x00ff00, url="https://github.com/Qoft/Mass-Shooting-Bot")
 			embed.add_field(name="Woohoo USA!", value=f"No mass shootings today!")
-		embed.add_field(name="Get the source today!", value="[Github](https://github.com/Qoft/Mass-Shooting-Bot)")
 		embed.set_footer(text=f"Api made by diamondburned: https://shootings.diamondb.xyz/ • Bot made by Qoft")
 
 
