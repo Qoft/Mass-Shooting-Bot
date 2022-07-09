@@ -18,14 +18,20 @@ async def shootings(ctx):
 		lastUpdated = shootings["LastUpdated"]
 		shootings_today = shootings["Records"]["Today"]
 		d = "s" if len(shootings_today) < 1 else ""
-		embed = discord.Embed(title=f"{len(shootings_today)} Mass shooting{d} today", color=0x00ff00, url=shootings["Records"]["Today"][0]["SourceURL"])
+		
 		if daysSince <= 1:
+			embed = discord.Embed(title=f"{len(shootings_today)} Mass shooting{d} today", color=0x00ff00, url=shootings["Records"]["Today"][0]["SourceURL"])
 			for shooting in shootings_today:
 				for key, value in shooting.items():
 					if key == "IncidentURL" or key == "SourceURL" or key == "IncidentID":
 						continue
 					else:
 						embed.add_field(name=f"{key}", value=f"{value}")
+			
+		else:
+			embed = discord.Embed(title=f"0 Mass shootings today", color=0x00ff00, url="https://github.com/Qoft/Mass-Shooting-Bot")
+			embed.add_field(name="Woohoo USA!", value=f"No mass shootings today!")
+		embed.add_field(name="Get the source today!", value="[Github](https://github.com/Qoft/Mass-Shooting-Bot)")
 		embed.set_footer(text=f"Api made by diamondburned: https://shootings.diamondb.xyz/ • Bot made by Qoft")
 		await ctx.respond(embed=embed)
 	except Exception as e:
