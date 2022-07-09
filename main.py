@@ -25,7 +25,7 @@ class InviteButton(discord.ui.Button):
         super().__init__(
             label="Invite me to your server",
             style=discord.ButtonStyle.link,
-            url="https://discord.com/api/oauth2/authorize?client_id=995113890990014464&permissions=8&scope=bot%20applications.commands",
+            url="https://discord.com/api/oauth2/authorize?client_id=995113890990014464&permissions=0&scope=applications.commands%20bot",
         )
 
 class SrcButton(discord.ui.Button):
