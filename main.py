@@ -31,7 +31,7 @@ class InviteButton(discord.ui.Button):
 class SrcButton(discord.ui.Button):
 	def __init__(self):
 		super().__init__(
-			label="Get Souce",
+			label="Get Source",
 			style=discord.ButtonStyle.link,
 			url="https://github.com/Qoft/Mass-Shooting-Bot",
 		)
