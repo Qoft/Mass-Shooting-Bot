@@ -4,21 +4,9 @@ from discord.ext import commands
 async def getMassShootings():
 	async with aiohttp.ClientSession(headers={"Accept":"application/json"}) as session:
 		async with session.get('https://shootings.diamondb.xyz/') as resp:
-			data = await resp.json()
-			return data
+			return resp
 
 bot = commands.Bot()
-
-
-
-
-
-
-
-
-
-
-
 
 class InviteButton(discord.ui.Button):
     def __init__(self):
@@ -41,6 +29,9 @@ async def shootings(ctx):
 	try:
 		await ctx.defer()
 		shootings = await getMassShootings()
+		if not shootings.ok:
+			return await ctx.respond(embed=discord.Embed(title="Error", description="Something went wrong while getting the shootings", color=0xFF0000))
+		shootings = await shootings.json()
 		daysSince = shootings["DaysSince"]
 		shootings_today = shootings["Records"]["Today"]
 		
