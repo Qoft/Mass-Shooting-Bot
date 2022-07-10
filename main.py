@@ -67,7 +67,7 @@ async def shootings(ctx):
 async def status():
     shootings = await getMassShootings()
     d = "s" if len(shootings.json()['Records']['Today']) < 1  or 0 else ""
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.streaming, name=f"{len(shootings.json()['Records']['Today'])} shooting{d} today"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.competing, name=f"{len(shootings.json()['Records']['Today'])} shooting{d} today"))
 
      
 @bot.event
