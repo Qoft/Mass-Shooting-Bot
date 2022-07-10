@@ -39,9 +39,10 @@ async def shootings(ctx):
 			embed = discord.Embed(title=f"{len(shootings_today)} Mass shooting{d} today", color=0x00ff00, url=shootings["Records"]["Today"][0]["SourceURL"])
 			for shooting in shootings_today:
 				for key, value in shooting.items():
-					if key == "IncidentURL" or key == "SourceURL" or key == "IncidentID" or key == "IncidentDate":
+					if key == "IncidentURL" or key == "SourceURL" or key == "IncidentID":
 						continue
 					else:
+						if key == "IncidentDate": key = "Date"
 						if key == "NoKilled": key = "Killed"
 						if key == "NoInjured": key = "Injured"
 						if key == "CityCounty": key = "City/County"
