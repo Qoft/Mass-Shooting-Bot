@@ -66,7 +66,7 @@ async def shootings(ctx):
 @tasks.loop(minutes=5) # repeat after every 10 seconds
 async def status():
     shootings = await getMassShootings()
-    d = "s" if len(len(shootings.json()['Records']['Today'])) < 1  or 0 else ""
+    d = "s" if len(shootings.json()['Records']['Today']) < 1  or 0 else ""
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{len(shootings.json()['Records']['Today'])} shooting{d} today"))
 
      
