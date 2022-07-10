@@ -42,6 +42,8 @@ async def shootings(ctx):
 					if key == "IncidentURL" or key == "SourceURL" or key == "IncidentID":
 						continue
 					else:
+						if key == "NoKilled": key = "Killed"
+						if key == "NoInjured": key = "Injured"
 						embed.add_field(name=f"{key}", value=f"{value}")
 				embed.add_field(name=f"============================================", value=f"===========================================", inline=False)
 			
