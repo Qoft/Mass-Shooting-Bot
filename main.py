@@ -41,10 +41,11 @@ async def shootings(ctx):
 				for key, value in shooting.items():
 					if key == "IncidentURL" or key == "SourceURL" or key == "IncidentID" or "IncidentDate":
 						continue
-					if key == "NoKilled": key = "Killed"
-					if key == "NoInjured": key = "Injured"
-					if key == "CityCounty": key = "City/County"
-					embed.add_field(name=f"{key}", value=f"{value}")
+					else:
+						if key == "NoKilled": key = "Killed"
+						if key == "NoInjured": key = "Injured"
+						if key == "CityCounty": key = "City/County"
+						embed.add_field(name=f"{key}", value=f"{value}")
 				embed.add_field(name=f"============================================", value=f"===========================================", inline=False)
 			
 		else:
