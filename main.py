@@ -34,7 +34,7 @@ async def shootings(ctx):
 		shootings = shootings.json()
 		shootings_today = shootings["Records"]["Today"]
 		
-		d = "s" if len(shootings_today) < 1 else ""
+		d = "s" if len(shootings_today) > 1 else ""
 		if shootings_today != []:
 			embed = discord.Embed(title=f"{len(shootings_today)} Mass shooting{d} today", color=0x00ff00, url=shootings["Records"]["Today"][0]["SourceURL"])
 			for shooting in shootings_today:
@@ -66,7 +66,7 @@ async def shootings(ctx):
 @tasks.loop(minutes=5) # repeat after every 10 seconds
 async def status():
     shootings = await getMassShootings()
-    d = "s" if len(shootings.json()['Records']['Today']) < 1  or 0 else ""
+    d = "s" if len(shootings.json()['Records']['Today']) > 1  or 0 else ""
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.competing, name=f"{len(shootings.json()['Records']['Today'])} shooting{d} today"))
 
      
