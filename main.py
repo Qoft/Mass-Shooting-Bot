@@ -30,7 +30,7 @@ async def shootings(ctx):
 		await ctx.defer()
 		shootings = await getMassShootings()
 		if not shootings.ok:
-			return await ctx.respond(embed=discord.Embed(title="Error", description="Something went wrong while getting the shootings", color=0xFF0000))
+			return await ctx.respond(embed=discord.Embed(title="Error", description="Something went wrong while getting the shootings (api prob broke, not qoft issue)", color=0xFF0000))
 		shootings = await shootings.json()
 		daysSince = shootings["DaysSince"]
 		shootings_today = shootings["Records"]["Today"]
