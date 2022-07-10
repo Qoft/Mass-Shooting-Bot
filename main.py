@@ -1,10 +1,10 @@
-import aiohttp, discord, json, datetime
+import httpx, discord, json, datetime
 from discord.ext import commands
 
 async def getMassShootings():
-	async with aiohttp.ClientSession(headers={"Accept":"application/json"}) as session:
-		async with session.get('https://shootings.diamondb.xyz/') as resp:
-			return resp
+	async with httpx.AsyncClient(headers={"Accept":"application/json"}) as client:
+		response = await client.get("https://shootings.diamondb.xyz/")
+		return response
 
 bot = commands.Bot()
 
@@ -29,10 +29,9 @@ async def shootings(ctx):
 	try:
 		await ctx.defer()
 		shootings = await getMassShootings()
-		if not shootings.ok:
+		if shootings.status_code != 200:
 			return await ctx.respond(embed=discord.Embed(title="Error", description="Something went wrong while getting the shootings (api prob broke, not qoft issue)", color=0xFF0000))
-		shootings = await shootings.json()
-		daysSince = shootings["DaysSince"]
+		shootings = shootings.json()
 		shootings_today = shootings["Records"]["Today"]
 		
 		d = "s" if len(shootings_today) < 1 else ""
@@ -44,6 +43,7 @@ async def shootings(ctx):
 						continue
 					else:
 						embed.add_field(name=f"{key}", value=f"{value}")
+				embed.add_field(name=f"============================================", value=f"===========================================", inline=False)
 			
 		else:
 			embed = discord.Embed(title=f"0 Mass shootings today", color=0x00ff00, url="https://github.com/Qoft/Mass-Shooting-Bot")
