@@ -1,5 +1,5 @@
 import httpx, discord, json, datetime
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 async def getMassShootings():
 	async with httpx.AsyncClient(headers={"Accept":"application/json"}) as client:
@@ -62,8 +62,19 @@ async def shootings(ctx):
 		embed = discord.Embed(title="Error", description=f"{e}", color=0xFF0000)
 		await ctx.respond(embed=embed)
      
+
+@tasks.loop(minutes=5) # repeat after every 10 seconds
+async def status():
+    shootings = await getMassShootings()
+    d = "s" if len(len(shootings.json()['Records']['Today'])) < 1  or 0 else ""
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{len(shootings.json()['Records']['Today'])} shooting{d} today"))
+
+     
 @bot.event
-async def on_ready(): print(f"Logged in as {bot.user.name}") 
+async def on_ready(): 
+    print(f"Logged in as {bot.user.name}")
+    status.start()
+     
 
 with open("config.json") as f: config = json.load(f)
 bot.run(config["token"])
